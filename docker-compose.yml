@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    image: nestjs-app:optimized
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db  # ← ИЗМЕНИТЕ с localhost на db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_NAME: lab17
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres    # ← ДОЛЖНО СОВПАДАТЬ С ВАШИМИ НАСТРОЙКАМИ
+      POSTGRES_PASSWORD: root    # ← ДОЛЖНО СОВПАДАТЬ С ВАШИМИ НАСТРОЙКАМИ
+      POSTGRES_DB: lab17         # ← ДОЛЖНО СОВПАДАТЬ С ВАШИМИ НАСТРОЙКАМИ
+    ports:
+      - "5432:5432"
